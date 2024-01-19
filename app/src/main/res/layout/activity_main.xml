@@ -22,34 +22,33 @@
         android:hint="Password" />
 
     <Button
+        android:id="@+id/button_inserir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserir"
-        android:id="@+id/button_inserir" />
+        android:text="Inserir" />
 
     <Button
+        android:id="@+id/button_editar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar"
-        android:id="@+id/button_editar" />
+        android:text="Editar" />
 
     <Button
+        android:id="@+id/button_excluir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Excluir"
-        android:id="@+id/button_excluir" />
+        android:text="Excluir" />
 
     <Button
+        android:id="@+id/button_limpar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Limpar"
-        android:id="@+id/button_limpar" />
+        android:text="Limpar" />
 
     <ListView
+        android:id="@+id/list_view_utilizadores"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_view_utilizadores" />
-
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

@@ -23,16 +23,14 @@ class MainActivity : AppCompatActivity() {
 
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaUtilizadores)
-            binding.listViewUtilizadores.adapter = adapter
+        binding.listViewUtilizadores.adapter = adapter
 
-            binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ ->
-                binding.editUsername.setText(listaUtilizadores.get(position).username)
-                binding.editUsername.setText(listaUtilizadores.get(position).password)
-                pos = position
+        binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ ->
+            binding.editUsername.setText(listaUtilizadores.get(position).username)
+            binding.editUsername.setText(listaUtilizadores.get(position).password)
+            pos = position
 
-            }
-
-
+        }
 
         binding.buttonInserir.setOnClickListener {
             val username = binding.editUsername.text.toString().trim()
@@ -58,18 +56,18 @@ class MainActivity : AppCompatActivity() {
                     binding.editUsername.setText("")
                     binding.editPassword.setText("")
                     pos = -1
-                    }
-                  }
                 }
-                binding.buttonExcluir.setOnClickListener {
-                    if (pos >= 0) {
-                        listaUtilizadores.removeAt(pos)
-                        adapter.notifyDataSetChanged()
-                        binding.editUsername.setText("")
-                        binding.editPassword.setText("")
-                        pos = -1
-                     }
-                }
+            }
+        }
+        binding.buttonExcluir.setOnClickListener {
+            if (pos >= 0) {
+                listaUtilizadores.removeAt(pos)
+                adapter.notifyDataSetChanged()
+                binding.editUsername.setText("")
+                binding.editPassword.setText("")
+                pos = -1
+            }
+        }
 
         binding.buttonLimpar.setOnClickListener {
             listaUtilizadores.clear()
