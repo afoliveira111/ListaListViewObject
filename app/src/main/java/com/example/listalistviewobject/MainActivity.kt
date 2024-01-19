@@ -23,12 +23,16 @@ class MainActivity : AppCompatActivity() {
 
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaUtilizadores)
-        binding.listViewUtilizadores.adapter = adapter
+            binding.listViewUtilizadores.adapter = adapter
 
-        binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ -> }
-            binding.editUsername.setText(listaUtilizadores.get(position).username)
-            binding.editUsername.setText(listaUtilizadores.get(position).password)
-            pos = position
+            binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ ->
+                binding.editUsername.setText(listaUtilizadores.get(position).username)
+                binding.editUsername.setText(listaUtilizadores.get(position).password)
+                pos = position
+
+            }
+
+
 
         binding.buttonInserir.setOnClickListener {
             val username = binding.editUsername.text.toString().trim()
@@ -39,13 +43,40 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
                 binding.editUsername.setText("")
                 binding.editPassword.setText("")
+                pos = -1
             }
-
         }
-        binding.buttonEditar.setOnClickListener {  }
-        binding.buttonExcluir.setOnClickListener {  }
-    }
+        binding.buttonEditar.setOnClickListener {
+            if (pos >= 0) {
+                val username = binding.editUsername.text.toString().trim()
+                val password = binding.editPassword.text.toString().trim()
 
+                if (!username.isEmpty() && !password.isEmpty()) {
+                    listaUtilizadores.get(pos).username = username
+                    listaUtilizadores.get(pos).password = password
+                    adapter.notifyDataSetChanged()
+                    binding.editUsername.setText("")
+                    binding.editPassword.setText("")
+                    pos = -1
+                }
+
+
+                binding.buttonExcluir.setOnClickListener {
+                    if (pos >= 0) {
+                        listaUtilizadores.removeAt(pos)
+                        adapter.notifyDataSetChanged()
+                        binding.editUsername.setText("")
+                        binding.editPassword.setText("")
+                        pos = -1
+
+
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 
