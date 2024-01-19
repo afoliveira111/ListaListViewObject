@@ -58,9 +58,9 @@ class MainActivity : AppCompatActivity() {
                     binding.editUsername.setText("")
                     binding.editPassword.setText("")
                     pos = -1
+                    }
+                  }
                 }
-
-
                 binding.buttonExcluir.setOnClickListener {
                     if (pos >= 0) {
                         listaUtilizadores.removeAt(pos)
@@ -68,11 +68,15 @@ class MainActivity : AppCompatActivity() {
                         binding.editUsername.setText("")
                         binding.editPassword.setText("")
                         pos = -1
-
-
-                    }
+                     }
                 }
-            }
+
+        binding.buttonLimpar.setOnClickListener {
+            listaUtilizadores.clear()
+            adapter.notifyDataSetChanged()
+            binding.editUsername.setText("")
+            binding.editPassword.setText("")
+            pos = -1
         }
     }
 }

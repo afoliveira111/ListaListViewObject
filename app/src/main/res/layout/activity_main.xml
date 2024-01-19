@@ -39,6 +39,12 @@
         android:text="Excluir"
         android:id="@+id/button_excluir" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Limpar"
+        android:id="@+id/button_limpar" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
