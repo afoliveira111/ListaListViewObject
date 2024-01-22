@@ -8,36 +8,34 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/edit_username"
+        android:id="@+id/editUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Username" />
+        android:hint="Username"/>
 
     <EditText
-        android:id="@+id/edit_password"
+        android:id="@+id/editPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Password" />
+        android:hint="Password"/>
 
     <Button
-        android:id="@+id/button_inserir"
+        android:id="@+id/buttonAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserir" />
+        android:text="Add"/>
 
     <Button
-        android:id="@+id/button_editar"
+        android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar" />
+        android:text="Update"/>
 
     <Button
-        android:id="@+id/button_excluir"
+        android:id="@+id/buttonDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Excluir" />
+        android:text="Delete"/>
 
     <Button
         android:id="@+id/button_limpar"
@@ -46,9 +44,9 @@
         android:text="Limpar" />
 
     <ListView
-        android:id="@+id/list_view_utilizadores"
+        android:id="@+id/listViewUtilizadores"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>
