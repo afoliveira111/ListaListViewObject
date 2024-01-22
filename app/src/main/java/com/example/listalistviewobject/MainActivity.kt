@@ -1,6 +1,5 @@
 package com.example.listalistviewobject
 
-import android.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
