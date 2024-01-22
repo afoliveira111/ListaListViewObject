@@ -11,7 +11,7 @@ Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin 
 - **Room Database:** Biblioteca de persistência que proporciona uma camada de abstração sobre o SQLite, facilitando o armazenamento e recuperação de dados.
 - **MVVM (Model-View-ViewModel):** Padrão arquitetônico que separa a lógica de apresentação do aplicativo e facilita a manutenção e teste.
 - **Coroutines:** Facilitam a execução de operações assíncronas de forma mais concisa e legível.
-- **Android Studio:** A IDE oficial para o desenvolvimento Android que oferece ferramentas poderosas para construir, testar e depurar aplicativos.
+- **Android Studio:**
 
 ## 💻 Experiência:
 
