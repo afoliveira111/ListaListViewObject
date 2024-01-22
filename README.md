@@ -15,5 +15,6 @@ Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin 
 
 ## 💻 Experiência:
 
-Durante esse processo, explorei e implementei operações CRUD (Create, Read, Update, Delete) em uma aplicação Android. Utilizei o Room Database para gerenciar a persistência de dados, adotando boas práticas como injeção de dependência, arquitetura MVVM e a utilização de coroutines para operações assíncronas.
+Durante esse processo, explorei e implementei operações CRUD (Create, Read, Update, Delete) em uma aplicação Android. 
+Utilizei o Room Database para gerenciar a persistência de dados, adotando boas práticas como injeção de dependência, arquitetura MVVM e a utilização de coroutines para operações assíncronas.
 
