@@ -4,7 +4,7 @@ Olá, pessoal! 🚀
 
 Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin e Room, e gostaria de compartilhar um pouco dessa jornada com vocês!
 
-## :camera_flash: Screenshots ()
+## :camera_flash: Screenshots (Em desenvolvimento...)
 <!-- You can add more screenshots here if you like -->
 
 ## 🛠 Tecnologias Utilizadas:
