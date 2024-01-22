@@ -18,3 +18,19 @@ Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin 
 Durante esse processo, explorei e implementei operações CRUD (Create, Read, Update, Delete) em uma aplicação Android. 
 Utilizei o Room Database para gerenciar a persistência de dados, adotando boas práticas como injeção de dependência, arquitetura MVVM e a utilização de coroutines para operações assíncronas.
 
+## 🚀 Resultados:
+
+- Criação e visualização de uma lista de utilizadores.
+- Adição de novos utilizadores.
+- Atualização e edição das informações dos utilizadores existentes.
+- Remoção de utilizadores.
+
+## 👨‍💻 Aprendizados:
+
+Esta jornada proporcionou não apenas a aplicação prática de conceitos fundamentais de desenvolvimento Android, mas também uma compreensão mais profunda da estrutura e boas práticas ao utilizar Kotlin, Room e arquiteturas modernas.
+
+Fico entusiasmado com os próximos passos nesta trajetória, enfrentando novos desafios e explorando ainda mais as possibilidades emocionantes do desenvolvimento Android.
+
+**#AndroidDev #Kotlin #RoomDatabase #MVVM #Coroutines #MobileDevelopment**
+
+Espero que gostem e fiquem à vontade para compartilhar suas experiências ou fazer perguntas! 🔍✨
