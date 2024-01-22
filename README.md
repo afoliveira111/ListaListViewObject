@@ -6,8 +6,8 @@ Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin 
 
 ## 🛠 Tecnologias Utilizadas:
 
-- **Kotlin:** A linguagem de programação moderna e concisa que torna o desenvolvimento Android mais eficiente e agradável.
-- **Android SDK:** Conjunto robusto de ferramentas e bibliotecas para criar aplicativos Android.
+- **Kotlin:** 
+- **Android SDK:** 
 - **Room Database:** Biblioteca de persistência que proporciona uma camada de abstração sobre o SQLite, facilitando o armazenamento e recuperação de dados.
 - **MVVM (Model-View-ViewModel):** Padrão arquitetônico que separa a lógica de apresentação do aplicativo e facilita a manutenção e teste.
 - **Coroutines:** Facilitam a execução de operações assíncronas de forma mais concisa e legível.
