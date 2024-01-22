@@ -29,4 +29,4 @@ Utilizei o Room Database para gerenciar a persistência de dados, adotando boas 
 
 Esta jornada proporcionou não apenas a aplicação prática de conceitos fundamentais de desenvolvimento Android, mas também uma compreensão mais profunda da estrutura e boas práticas ao utilizar Kotlin, Room e arquiteturas modernas.
 
-
+Antonio Felipe Oliveira www.linkedin.com/in/id-antonio-felipe
