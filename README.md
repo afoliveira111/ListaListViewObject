@@ -1,4 +1,4 @@
-# Explorando ListViewObject CRUD
+# Explorando ListViewObject CRUD (Para estudo)
 
 Olá, pessoal! 🚀
 
