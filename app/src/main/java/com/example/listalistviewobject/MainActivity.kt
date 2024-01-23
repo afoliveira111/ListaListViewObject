@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaUtilizadores)
         binding.listViewUtilizadores.adapter = adapter
 
-    }
+        binding.listViewUtilizadores.setOnItemClickListener { parent, view, position, id ->
+            binding.editUsername.setText(listaUtilizadores.get(position).username)
+            binding.editUsername.setText(listaUtilizadores.get(position).password)
 
+        }
+    }
 }
