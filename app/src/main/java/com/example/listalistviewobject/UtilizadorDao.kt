@@ -19,4 +19,7 @@ interface UtilizadorDao {
 
     @Delete
     suspend fun deleteUtilizador(utilizador: Utilizador)
+
+    @Query("DELETE FROM utilizadores")
+    suspend fun deleteAllUtilizadores()
 }
