@@ -41,16 +41,31 @@ class MainActivity : AppCompatActivity() {
             val username = binding.editUsername.text.toString().trim()
             val password = binding.editUsername.text.toString().trim()
 
-            if(!username.isEmpty() && !password.isEmpty()) {
+            if (!username.isEmpty() && !password.isEmpty()) {
                 listaUtilizadores.add(Utilizador(username, password))
                 adapter.notifyDataSetChanged()
                 binding.editUsername.setText("")
                 binding.editPassword.setText("")
+                pos = -1
             }
         }
-        binding.buttonUpdate.setOnClickListener {  }
+        binding.buttonUpdate.setOnClickListener {
+            if (pos >= 0) {
+                val username = binding.editUsername.text.toString().trim()
+                val password = binding.editPassword.text.toString().trim()
+                if (!username.isEmpty() && !password.isEmpty()) {
+                    listaUtilizadores.get(pos).username = username
+                    listaUtilizadores.get(pos).password = password
+                    adapter.notifyDataSetChanged()
+                    binding.editUsername.setText("")
+                    binding.editPassword.setText("")
+                    pos = -1
+
+                }
+            }
+        }
         binding.buttonDelete.setOnClickListener {
-            if(pos >= 0) {
+            if (pos >= 0) {
                 listaUtilizadores.removeAt(pos)
                 adapter.notifyDataSetChanged()
                 binding.editUsername.setText("")
@@ -60,3 +75,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+

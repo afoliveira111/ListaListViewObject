@@ -2,7 +2,7 @@ package com.example.listalistviewobject
 
 
 
-class Utilizador(val username: String, val password: String){
+class Utilizador(var username: String, var password: String){
 
     override fun toString(): String {
         return username
