@@ -73,6 +73,13 @@ class MainActivity : AppCompatActivity() {
                 pos = -1
             }
         }
+        binding.buttonDeleteAll.setOnClickListener {
+            listaUtilizadores.clear()
+            adapter.notifyDataSetChanged()
+            binding.editUsername.setText("")
+            binding.editPassword.setText("")
+            pos = -1
+        }
     }
 }
 
