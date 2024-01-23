@@ -1,10 +1,12 @@
 package com.example.listalistviewobject
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-
-class Utilizador(var username: String, var password: String){
-
-    override fun toString(): String {
-        return username
-    }
-}
+@Entity(tableName = "utilizadores")
+data class Utilizador(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val username: String,
+    val password: String
+)

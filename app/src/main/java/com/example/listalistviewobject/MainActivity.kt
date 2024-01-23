@@ -1,80 +1,63 @@
 package com.example.listalistviewobject
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listalistviewobject.databinding.ActivityMainBinding
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var pos = -1
+    private val utilizadorDao by lazy {
+        AppDatabase.getInstance(applicationContext).utilizadorDao()
+    }
+    private lateinit var adapter: ArrayAdapter<Utilizador>
+    private val listaUtilizadores = ArrayList<Utilizador>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val listaUtilizadores = ArrayList<Utilizador>()
-        listaUtilizadores.add(Utilizador("user", "pass"))
-        listaUtilizadores.add(Utilizador("admin", "pwd123"))
-        listaUtilizadores.add(Utilizador("aaa", "bbb"))
-
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaUtilizadores)
-        binding.listViewUtilizadores.adapter = adapter
-
-        binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ ->
-            binding.editUsername.setText(listaUtilizadores.get(position).username)
-            binding.editUsername.setText(listaUtilizadores.get(position).password)
-            pos = position
+        adapter = object : ArrayAdapter<Utilizador>(
+            this,
+            android.R.layout.simple_list_item_1,
+            listaUtilizadores
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val utilizador = getItem(position)
+                (view as TextView).text = utilizador?.username ?: ""
+                return view
+            }
         }
+
+        binding.listViewUtilizadores.adapter = adapter
 
         binding.buttonAdd.setOnClickListener {
             val username = binding.editUsername.text.toString().trim()
-            val password = binding.editUsername.text.toString().trim()
+            val password = binding.editPassword.text.toString().trim()
 
-            if (!username.isEmpty() && !password.isEmpty()) {
-                listaUtilizadores.add(Utilizador(username, password))
-                adapter.notifyDataSetChanged()
-                binding.editUsername.setText("")
-                binding.editPassword.setText("")
-                pos = -1
-            }
-        }
-        binding.buttonUpdate.setOnClickListener {
-            if (pos >= 0) {
-                val username = binding.editUsername.text.toString().trim()
-                val password = binding.editPassword.text.toString().trim()
-                if (!username.isEmpty() && !password.isEmpty()) {
-                    listaUtilizadores.get(pos).username = username
-                    listaUtilizadores.get(pos).password = password
-                    adapter.notifyDataSetChanged()
-                    binding.editUsername.setText("")
-                    binding.editPassword.setText("")
-                    pos = -1
-
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    utilizadorDao.insertUtilizador(Utilizador(username = username, password = password))
+                    withContext(Dispatchers.Main) {
+                        listaUtilizadores.clear()
+                        listaUtilizadores.addAll(utilizadorDao.getAllUtilizadores())
+                        adapter.notifyDataSetChanged()
+                    }
                 }
             }
         }
-        binding.buttonDelete.setOnClickListener {
-            if (pos >= 0) {
-                listaUtilizadores.removeAt(pos)
-                adapter.notifyDataSetChanged()
-                binding.editUsername.setText("")
-                binding.editPassword.setText("")
-                pos = -1
-            }
-        }
-        binding.buttonDeleteAll.setOnClickListener {
-            listaUtilizadores.clear()
-            adapter.notifyDataSetChanged()
-            binding.editUsername.setText("")
-            binding.editPassword.setText("")
-            pos = -1
-        }
     }
 }
+
 
 
