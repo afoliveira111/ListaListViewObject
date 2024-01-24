@@ -54,52 +54,47 @@ class MainActivity : AppCompatActivity() {
                             password = password
                         )
                     )
-                    withContext(Dispatchers.Main) {
+                   withContext(Dispatchers.Main) {
                         listaUtilizadores.clear()
                         listaUtilizadores.addAll(utilizadorDao.getAllUtilizadores())
                         adapter.notifyDataSetChanged()
 
-                        binding.buttonUpdate.setOnClickListener {
-                            if (pos >= 0) {
-                                val username = binding.editUsername.text.toString().trim()
-                                val password = binding.editPassword.text.toString().trim()
-                                if (!username.isEmpty() && !password.isEmpty()) {
-                                    GlobalScope.launch(Dispatchers.IO) {
-                                        utilizadorDao.updateUtilizador(
-                                            Utilizador(
-                                                id = listaUtilizadores[pos].id,
-                                                username = username,
-                                                password = password
-                                            )
-                                        )
-                                        withContext(Dispatchers.Main) {
-                                            listaUtilizadores.clear()
-                                            listaUtilizadores.addAll(utilizadorDao.getAllUtilizadores())
-                                            adapter.notifyDataSetChanged()
-                                            binding.editUsername.setText("")
-                                            binding.editPassword.setText("")
-                                            pos = -1
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                       binding.buttonUpdate.setOnClickListener {
+                           if (pos >= 0) {
+                               val username = binding.editUsername.text.toString().trim()
+                               val password = binding.editPassword.text.toString().trim()
+                               if (username.isNotEmpty() && password.isNotEmpty()) {
+                                   GlobalScope.launch(Dispatchers.IO) {
+                                       val utilizador = listaUtilizadores.get(pos)
+                                       utilizador.username = username
+                                       utilizador.password = password
+                                       utilizadorDao.updateUtilizador(utilizador)
+                                       withContext(Dispatchers.Main) {
+                                           adapter.notifyDataSetChanged()
+                                           binding.editUsername.setText("")
+                                           binding.editPassword.setText("")
+                                           pos = -1
+                                       }
+                                   }
+                               }
+                           }
+                       }
 
-                        binding.buttonDelete.setOnClickListener {
-                            if (pos >= 0) {
-                                GlobalScope.launch(Dispatchers.IO) {
-                                    utilizadorDao.deleteUtilizador(listaUtilizadores[pos])
-                                    withContext(Dispatchers.Main) {
-                                        listaUtilizadores.clear()
-                                        listaUtilizadores.addAll(utilizadorDao.getAllUtilizadores())
-                                        adapter.notifyDataSetChanged()
-                                        binding.editUsername.setText("")
-                                        binding.editPassword.setText("")
-                                        pos = -1
-                                    }
-                                }
-                            }
-                        }
+                       binding.buttonDelete.setOnClickListener {
+                           if (pos >= 0) {
+                               GlobalScope.launch(Dispatchers.IO) {
+                                   val utilizador = listaUtilizadores.get(pos)
+                                   utilizadorDao.deleteUtilizador(utilizador)
+                                   withContext(Dispatchers.Main) {
+                                       listaUtilizadores.removeAt(pos)
+                                       adapter.notifyDataSetChanged()
+                                       binding.editUsername.setText("")
+                                       binding.editPassword.setText("")
+                                       pos = -1
+                                   }
+                               }
+                           }
+                       }
 
                         binding.buttonDeleteAll.setOnClickListener {
                             GlobalScope.launch(Dispatchers.IO) {
@@ -112,9 +107,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
             }
-
         }
     }
 }
