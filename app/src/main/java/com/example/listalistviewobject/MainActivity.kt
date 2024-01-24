@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var adapter: ArrayAdapter<Utilizador>
     private val listaUtilizadores = ArrayList<Utilizador>()
+    private var pos = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,69 +48,76 @@ class MainActivity : AppCompatActivity() {
 
             if (username.isNotEmpty() && password.isNotEmpty()) {
                 GlobalScope.launch(Dispatchers.IO) {
-                    utilizadorDao.insertUtilizador(
-                        Utilizador(
-                            username = username,
-                            password = password
-                        )
-                    )
-                   withContext(Dispatchers.Main) {
-                        listaUtilizadores.clear()
-                        listaUtilizadores.addAll(utilizadorDao.getAllUtilizadores())
+                    val newUtilizador = Utilizador(username = username, password = password)
+                    utilizadorDao.insertUtilizador(newUtilizador)
+                    withContext(Dispatchers.Main) {
+                        listaUtilizadores.add(newUtilizador)
                         adapter.notifyDataSetChanged()
+                        binding.editUsername.setText("")
+                        binding.editPassword.setText("")
+                        pos = -1
+                    }
+                }
+            }
+        }
 
-                       binding.buttonUpdate.setOnClickListener {
-                           val selectedUtilizador = binding.listViewUtilizadores.selectedItem as? Utilizador
-                           selectedUtilizador?.let {
-                               val username = binding.editUsername.text.toString().trim()
-                               val password = binding.editPassword.text.toString().trim()
-
-                               if (username.isNotEmpty() && password.isNotEmpty()) {
-                                   GlobalScope.launch(Dispatchers.IO) {
-                                       it.username = username
-                                       it.password = password
-                                       utilizadorDao.updateUtilizador(it)
-                                       withContext(Dispatchers.Main) {
-                                           adapter.notifyDataSetChanged()
-                                           binding.editUsername.setText("")
-                                           binding.editPassword.setText("")
-                                       }
-                                   }
-                               }
-                           }
-                       }
-
-                       binding.buttonDelete.setOnClickListener {
-                           val selectedUtilizador = binding.listViewUtilizadores.selectedItem as? Utilizador
-                           selectedUtilizador?.let {
-                               GlobalScope.launch(Dispatchers.IO) {
-                                   utilizadorDao.deleteUtilizador(it)
-                                   withContext(Dispatchers.Main) {
-                                       listaUtilizadores.remove(it)
-                                       adapter.notifyDataSetChanged()
-                                       binding.editUsername.setText("")
-                                       binding.editPassword.setText("")
-                                   }
-                               }
-                           }
-                       }
-
-                        binding.buttonDeleteAll.setOnClickListener {
-                            GlobalScope.launch(Dispatchers.IO) {
-                                utilizadorDao.deleteAllUtilizadores()
-                                withContext(Dispatchers.Main) {
-                                    listaUtilizadores.clear()
-                                    adapter.notifyDataSetChanged()
-                                }
-                            }
+        binding.buttonUpdate.setOnClickListener {
+            if (pos >= 0) {
+                val username = binding.editUsername.text.toString().trim()
+                val password = binding.editPassword.text.toString().trim()
+                if (username.isNotEmpty() && password.isNotEmpty()) {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        val utilizador = listaUtilizadores[pos]
+                        utilizador.username = username
+                        utilizador.password = password
+                        utilizadorDao.updateUtilizador(utilizador)
+                        withContext(Dispatchers.Main) {
+                            adapter.notifyDataSetChanged()
+                            binding.editUsername.setText("")
+                            binding.editPassword.setText("")
+                            pos = -1
                         }
                     }
                 }
             }
         }
+
+        binding.buttonDelete.setOnClickListener {
+            if (pos >= 0) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    val utilizador = listaUtilizadores[pos]
+                    utilizadorDao.deleteUtilizador(utilizador)
+                    withContext(Dispatchers.Main) {
+                        listaUtilizadores.removeAt(pos)
+                        adapter.notifyDataSetChanged()
+                        binding.editUsername.setText("")
+                        binding.editPassword.setText("")
+                        pos = -1
+                    }
+                }
+            }
+        }
+
+        binding.buttonDeleteAll.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                utilizadorDao.deleteAllUtilizadores()
+                withContext(Dispatchers.Main) {
+                    listaUtilizadores.clear()
+                    adapter.notifyDataSetChanged()
+                    binding.editUsername.setText("")
+                    binding.editPassword.setText("")
+                    pos = -1
+                }
+            }
+        }
+
+        binding.listViewUtilizadores.setOnItemClickListener { _, _, position, _ ->
+            binding.editUsername.setText(listaUtilizadores[position].username)
+            binding.editPassword.setText(listaUtilizadores[position].password)
+            pos = position
+        }
     }
 }
-
 
 
 
