@@ -15,7 +15,6 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var pos = -1
     private val utilizadorDao by lazy {
         AppDatabase.getInstance(applicationContext).utilizadorDao()
     }
@@ -60,20 +59,20 @@ class MainActivity : AppCompatActivity() {
                         adapter.notifyDataSetChanged()
 
                        binding.buttonUpdate.setOnClickListener {
-                           if (pos >= 0) {
+                           val selectedUtilizador = binding.listViewUtilizadores.selectedItem as? Utilizador
+                           selectedUtilizador?.let {
                                val username = binding.editUsername.text.toString().trim()
                                val password = binding.editPassword.text.toString().trim()
+
                                if (username.isNotEmpty() && password.isNotEmpty()) {
                                    GlobalScope.launch(Dispatchers.IO) {
-                                       val utilizador = listaUtilizadores.get(pos)
-                                       utilizador.username = username
-                                       utilizador.password = password
-                                       utilizadorDao.updateUtilizador(utilizador)
+                                       it.username = username
+                                       it.password = password
+                                       utilizadorDao.updateUtilizador(it)
                                        withContext(Dispatchers.Main) {
                                            adapter.notifyDataSetChanged()
                                            binding.editUsername.setText("")
                                            binding.editPassword.setText("")
-                                           pos = -1
                                        }
                                    }
                                }
@@ -81,16 +80,15 @@ class MainActivity : AppCompatActivity() {
                        }
 
                        binding.buttonDelete.setOnClickListener {
-                           if (pos >= 0) {
+                           val selectedUtilizador = binding.listViewUtilizadores.selectedItem as? Utilizador
+                           selectedUtilizador?.let {
                                GlobalScope.launch(Dispatchers.IO) {
-                                   val utilizador = listaUtilizadores.get(pos)
-                                   utilizadorDao.deleteUtilizador(utilizador)
+                                   utilizadorDao.deleteUtilizador(it)
                                    withContext(Dispatchers.Main) {
-                                       listaUtilizadores.removeAt(pos)
+                                       listaUtilizadores.remove(it)
                                        adapter.notifyDataSetChanged()
                                        binding.editUsername.setText("")
                                        binding.editPassword.setText("")
-                                       pos = -1
                                    }
                                }
                            }
