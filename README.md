@@ -1,6 +1,5 @@
 # Explorando ListViewObject CRUD (Room)
 
-Olá, pessoal!  🚀
 
 Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin e Room, e gostaria de compartilhar um pouco dessa jornada com vocês!
 
