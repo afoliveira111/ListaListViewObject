@@ -1,4 +1,4 @@
-# Explorando ListViewObject CRUD (Room)
+# Explorando List View Object CRUD (Room)
 
 
 Desenvolvimento Android utilizando Kotlin e Room.
