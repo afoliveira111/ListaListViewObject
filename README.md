@@ -1,7 +1,7 @@
 # Explorando ListViewObject CRUD (Room)
 
 
-Recentemente, mergulhei mais fundo no desenvolvimento Android utilizando Kotlin e Room, e gostaria de compartilhar um pouco dessa jornada com vocês!
+Desenvolvimento Android utilizando Kotlin e Room, e gostaria de compartilhar um pouco dessa jornada com vocês!
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
